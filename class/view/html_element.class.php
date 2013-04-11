@@ -1,15 +1,27 @@
 <?php
-
+/**
+ * Changelog: Version 1.001 - Date 11.04.2013
+ *            Hinzufügen der  möglichkeit Attribute als 
+ *            Array zu übergeben.
+ *            Eigenschaft Unique Node Identifyer
+ * 
+ **/
 namespace view;
 
 /**
  * Erzeugt ein HTML-Element
  * @package view
  * @author thorsten schoelzel<thorsten@earafour.de>
- * @version 1.0
+ * @version 1.001
  */
 class html_element implements \interfaces\html_element, \interfaces\tostring {
 
+    /**
+     * Unique Node Identifyer - Interner Einmaliger Node Schlüssel
+     * @var string
+     */
+    private $unid = '';
+    
     /**
      * Liste von Attributen
      * @var array
@@ -106,6 +118,20 @@ class html_element implements \interfaces\html_element, \interfaces\tostring {
      */
     public function getNodeValue() {
         return $this->nodeValue;
+    }
+    
+    /**
+     * Fügt die im Array angegebenen Attribute dem Element hinzu
+     * @param array $attributes Dictionary der Attribute. 
+     */
+    public function addAttributes( $attributes='' ){
+        if(is_array($attributes)){
+            foreach($attributes as $attribute => $value){
+                if(\preg_match('/(id|style|class|rel|size|type|value|length|maxlength|src|href|target|title|alt|checked|onclick|onkeyup|onblur)*/',$attribute)){                    
+                        $this->attributes[$attribute] = $value;
+                }
+            }
+        }
     }
 
 }
