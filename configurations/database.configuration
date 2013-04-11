@@ -1,0 +1,5 @@
+; Database Connection Informations
+host=localhost
+user=ff
+database=ff
+password=asgard

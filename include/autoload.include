@@ -1,0 +1,19 @@
+<?php
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+/**
+ * Lädt Automatisch eine Klasse
+ * @version 1.0
+ * @author thorsten schoelzel<thorsten@earafour.de>
+ * @param string $class Namespace und Name der zu holenden Klasse
+ */
+function autoload($class) {
+    $class_array = explode('\\', $class);
+    include_once ( 'class/'.implode('/', $class_array) . '.class.php' );
+}
+
+spl_autoload_register('autoload');
+?>
